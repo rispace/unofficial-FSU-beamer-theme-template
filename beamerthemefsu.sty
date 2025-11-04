@@ -62,7 +62,7 @@
     \begin{beamercolorbox}[wd=0.85\paperwidth, rounded=true, shadow=true, center]{title box}
     \usebeamerfont{title}
     \centering
-    \parbox{0.85\paperwidth}{\centering\inserttitle}
+    \parbox{0.8\paperwidth}{\centering\inserttitle}
     \end{beamercolorbox}
 
     
@@ -86,14 +86,14 @@
 \setbeamertemplate{headline}{
   \leavevmode%
   \hbox{%
-    \begin{beamercolorbox}[wd=0.5\paperwidth, ht=1.5ex, dp=1.5ex, center]{headline left}%
+    \begin{beamercolorbox}[wd=0.5\paperwidth, ht=1.8ex, dp=1.8ex, center]{headline left}%
       \centering
-      \vspace{-1ex}
+      \vspace{-1.3ex}
       \usebeamerfont{section in head/foot} \insertsectionhead
     \end{beamercolorbox}%
-    \begin{beamercolorbox}[wd=0.5\paperwidth, ht=1.5ex, dp=1.5ex, center]{headline right}%
+    \begin{beamercolorbox}[wd=0.5\paperwidth, ht=1.8ex, dp=1.8ex, center]{headline right}%
       \centering
-      \vspace{-1.25ex}
+      \vspace{-1.3ex}
       \usebeamerfont{section in head/foot}
       \ifx\insertframetitle\empty
         % Do nothing
@@ -158,12 +158,19 @@
 
 %==================== frame title ==========================
 \setbeamertemplate{frametitle}{
-    \vskip-0.2ex
-    \begin{beamercolorbox}[wd=\paperwidth, ht=3ex, dp=1.5ex, shadow=true]{frametitle}
-        \usebeamerfont{frametitle}\hspace{1.5ex}\insertframetitle
+    \vskip-0.62ex
+    \begin{beamercolorbox}[
+        wd=\paperwidth,
+        ht=2.3ex,        % was 3ex
+        dp=0.9ex,      % was 1.5ex
+        shadow=true,
+        leftskip=1.2ex,rightskip=1.2ex
+    ]{frametitle}
+        \usebeamerfont{frametitle}\insertframetitle
     \end{beamercolorbox}
     \vskip0.5ex
 }
+
 
 % ======================
 % Footer Content
@@ -188,7 +195,7 @@
     \end{beamercolorbox}%
     \begin{beamercolorbox}[wd=0.5\paperwidth,ht=2ex,dp=1.5ex,center]{footline center}%
       \centering
-      \vspace{-0.8ex}
+      \vspace{-1.09ex}
       \usebeamerfont{section in head/foot} 
       \insertshorttitle
     \end{beamercolorbox}%
