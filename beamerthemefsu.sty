@@ -14,7 +14,14 @@
 \iffsutheme@presentation
     \RequirePackage{ragged2e}
     \setbeamerfont{headline institute}{size=\Large}
+    \setbeamerfont{section in toc}{size=\large}
+    \setbeamerfont{subsection in toc}{size=\small}
+    \setbeamerfont{subsubsection in toc}{size=\tiny}
     \setbeamertemplate{section in toc}[sections numbered]
+    \setbeamertemplate{subsection in toc}{
+    \leavevmode
+    \hspace{1.1em}\fsuglowbullet \hspace{0.2em}\inserttocsubsection\par
+    }
 \else 
 % ======================
 % Font Setup (Times New Roman Look for pdfLaTeX)
@@ -28,6 +35,9 @@
 \RequirePackage{xcolor}
 
 \usefonttheme{professionalfonts}
+
+
+
 
 % ======================
 % Default Font Settings
@@ -119,6 +129,20 @@
   }
 }
 
+\RequirePackage{tikz}
+\newcommand{\fsuglowbullet}{
+    \tikz[baseline=-0.6ex]{
+        \shade[ball color=FSUGarnet] (0,0) circle (0.12cm);
+    }
+}
+
+\setbeamertemplate{itemize item}{\fsuglowbullet}
+\setbeamertemplate{itemize subitem}{
+    \tikz[baseline=-0.4ex]{
+        \shade[ball color=FSUGarnet] (0,0) circle (0.09 cm);
+    }
+}
+
 \else
 %==========Poster Header=======
 \setbeamertemplate{headline}{
@@ -181,7 +205,7 @@
 \setbeamerfont{date in head/foot}{size=\scriptsize}
 \setbeamerfont{section in head/foot}{size=\scriptsize}
 \setbeamerfont{subsection in head/foot}{size=\scriptsize}
-
+\setbeamerfont{footnote}{size=\tiny}
 %==========Presentation footer============
 \setbeamertemplate{footline}{
 
