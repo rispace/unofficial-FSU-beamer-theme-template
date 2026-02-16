@@ -145,17 +145,25 @@
 
 \else
 %==========Poster Header=======
+% Define the default widths
+\newlength{\leftlogowidth}
+\newlength{\centertitlewidth}
+\newlength{\rightlogowidth}
+\setlength{\leftlogowidth}{0.2\paperwidth}
+\setlength{\centertitlewidth}{0.6\paperwidth}
+\setlength{\rightlogowidth}{0.2\paperwidth}
+
 \setbeamertemplate{headline}{
   \begin{beamercolorbox}{headline}
     \begin{columns}
-      \begin{column}{0.2\paperwidth}
+      \begin{column}{\leftlogowidth}
         \ifdefined\insertlogoleft
         \vspace*{0.5ex}
-        \hspace{7ex}
+        \centering 
         \insertlogoleft
         \fi
       \end{column}
-      \begin{column}{0.6\paperwidth}
+      \begin{column}{\centertitlewidth}
         \centering
         \vskip2ex
         {\usebeamerfont{headline title} \inserttitle \par}
@@ -164,12 +172,11 @@
         \vskip0.5ex
         {\usebeamerfont{headline institute} \insertinstitute \par}
       \end{column}
-      \begin{column}{0.2\paperwidth}
+      \begin{column}{\rightlogowidth}
         \ifdefined\insertlogoright
         \vspace*{0.5ex}
-        \hspace{3.5in}
+        \centering 
         \insertlogoright
-        \hspace{2ex}
         \fi
       \end{column}
     \end{columns}
