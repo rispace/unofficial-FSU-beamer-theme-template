@@ -3,7 +3,7 @@
 \ProvidesPackage{beamerthemefsu}[2025/04/04 FSU Custom Theme Unofficial]
 \RequirePackage{kvoptions}
 \RequirePackage{etoolbox}
-
+\RequirePackage[most]{tcolorbox}
 \SetupKeyvalOptions{
     family=fsutheme,
     prefix=fsutheme@
@@ -11,33 +11,56 @@
 
 \DeclareBoolOption[false]{presentation}
 \ProcessKeyvalOptions*
+% ======================
+% Global Bullet Styling
+% ======================
+\RequirePackage{tikz}
+\newcommand{\fsuglowbullet}{
+    \tikz[baseline=-0.6ex]{
+        \shade[ball color=FSUGarnet] (0,0) circle (0.12cm);
+    }
+}
+
+\setbeamertemplate{itemize item}{\fsuglowbullet}
+\setbeamertemplate{itemize subitem}{
+    \tikz[baseline=-0.4ex]{
+        \shade[ball color=FSUGarnet] (0,0) circle (0.09 cm);
+    }
+}
+
 \iffsutheme@presentation
+    \RequirePackage[T1]{fontenc}
+    \RequirePackage{lmodern}
     \RequirePackage{ragged2e}
+    \RequirePackage{xcolor}
+
+    \renewcommand{\familydefault}{\rmdefault}
+    \usefonttheme{professionalfonts}
+
     \setbeamerfont{headline institute}{size=\Large}
     \setbeamerfont{section in toc}{size=\large}
     \setbeamerfont{subsection in toc}{size=\small}
     \setbeamerfont{subsubsection in toc}{size=\tiny}
     \setbeamertemplate{section in toc}[sections numbered]
     \setbeamertemplate{subsection in toc}{
-    \leavevmode
-    \hspace{1.1em}\fsuglowbullet \hspace{0.2em}\inserttocsubsection\par
+      \leavevmode
+      \hspace{1.1em}\fsuglowbullet \hspace{0.2em}\inserttocsubsection\par
     }
-\else 
+\else
 % ======================
-% Font Setup (Times New Roman Look for pdfLaTeX)
+% Poster Font Setup (Latin Modern Serif)
 % ======================
-\RequirePackage[T1]{fontenc}       % Proper font encoding
-\RequirePackage{mathptmx}          % Times text + math fonts
+\RequirePackage[T1]{fontenc}
+\RequirePackage{lmodern}
 \RequirePackage{calc}
 \RequirePackage{ragged2e}
 \RequirePackage{changepage}
 \RequirePackage{pgffor}
 \RequirePackage{xcolor}
 
-\usefonttheme{professionalfonts}
-
-
-
+% FORCE SERIF DEFAULT: This is the missing piece
+\renewcommand{\familydefault}{\rmdefault}
+\usefonttheme{professionalfonts} 
 
 % ======================
 % Default Font Settings
@@ -92,19 +115,15 @@
   \end{center}
 }
 
-%=========Presentation Header=======
+%=========Presentation Header======= 
 \setbeamertemplate{headline}{
   \leavevmode%
   \hbox{%
-    \begin{beamercolorbox}[wd=0.5\paperwidth, ht=1.8ex, dp=1.8ex, center]{headline left}%
-      \centering
-      \vspace{-1.3ex}
-      \usebeamerfont{section in head/foot} \insertsectionhead
+    \begin{beamercolorbox}[wd=0.5\paperwidth, ht=2.5ex, dp=1.5ex, center]{headline left}%
+      \usebeamerfont{section in head/foot}\vfill\insertsectionhead\vfill
     \end{beamercolorbox}%
-    \begin{beamercolorbox}[wd=0.5\paperwidth, ht=1.8ex, dp=1.8ex, center]{headline right}%
-      \centering
-      \vspace{-1.3ex}
-      \usebeamerfont{section in head/foot}
+    \begin{beamercolorbox}[wd=0.5\paperwidth, ht=2.5ex, dp=1.5ex, center]{headline right}%
+      \usebeamerfont{section in head/foot}\vfill
       \ifx\insertframetitle\empty
         % Do nothing
       \else
@@ -116,32 +135,20 @@
           \else
             \foreach \n in {\insertsectionstartpage,...,\insertsectionendpage}{
               \ifnum\n=\insertframenumber
-                \hyperlink{slide\n}{\raisebox{0.15ex}{\large$\bullet$}}
+                \hyperlink{slide\n}{\raisebox{0ex}{\large$\bullet$}}
               \else
-                \hyperlink{slide\n}{\color{gray!60}\raisebox{0.15ex}{\small$\bullet$}}
+                \hyperlink{slide\n}{\color{gray!60}\raisebox{0ex}{\small$\bullet$}}
               \fi
               \hspace{0.2em}
             }
           \fi
         \fi
       \fi
+      \vfill
     \end{beamercolorbox}%
   }
 }
 
-\RequirePackage{tikz}
-\newcommand{\fsuglowbullet}{
-    \tikz[baseline=-0.6ex]{
-        \shade[ball color=FSUGarnet] (0,0) circle (0.12cm);
-    }
-}
-
-\setbeamertemplate{itemize item}{\fsuglowbullet}
-\setbeamertemplate{itemize subitem}{
-    \tikz[baseline=-0.4ex]{
-        \shade[ball color=FSUGarnet] (0,0) circle (0.09 cm);
-    }
-}
 
 \else
 %==========Poster Header=======
@@ -182,10 +189,15 @@
         \fi
       \end{column}
     \end{columns}
-    \vspace{1ex}
     \begin{beamercolorbox}[wd=\paperwidth,ht=1ex]{headline rule}
     \end{beamercolorbox}
   \end{beamercolorbox}
+  \vspace{-5ex}
+}
+\renewcommand{\fsuglowbullet}{
+    \tikz[baseline=-0.6ex]{
+        \shade[ball color=FSUGarnet] (0,0) circle (0.2cm); % Slightly larger for posters
+    }
 }
 \fi
 
@@ -223,14 +235,14 @@
   \hbox{%
     \begin{beamercolorbox}[wd=0.2\paperwidth,ht=2ex,dp=1.5ex,center]{footline left}%
         \centering
-        \vspace{-1.09 ex}
+        \vspace{-.7 ex}
       \usebeamerfont{section in head/foot} \hspace{1ex}\insertshortauthor
     \end{beamercolorbox}%
     \begin{beamercolorbox}[wd=0.5\paperwidth,ht=2ex,dp=1.5ex,center]{footline center}%
       \centering
-      \vspace{-1.09ex}
-      \usebeamerfont{section in head/foot} 
-      \insertshorttitle
+      \vspace{-.7ex}
+      \usebeamerfont{section in head/foot}
+      \hspace{1ex}\insertshorttitle
     \end{beamercolorbox}%
     \begin{beamercolorbox}[wd=0.3\paperwidth,ht=2ex,dp=1.5ex,right]{footline right}%
       \centering
@@ -248,7 +260,7 @@
 
 \setbeamertemplate{footline}{
   \ifdefined\insertfootercontent
-  \begin{beamercolorbox}[wd=\paperwidth,ht=3ex,dp=2ex]{footline}
+  \begin{beamercolorbox}[wd=\paperwidth,ht=2ex,dp=1ex]{footline}
     \usebeamerfont{footline} \insertfootercontent
     \hspace{\sepwidth}
   \end{beamercolorbox}
@@ -278,58 +290,49 @@
 }
    
 \else
+% ======================
+% Corrected Poster Block Styling (Fixed pgfkeys Error)
+% ======================
 \setbeamertemplate{block begin}{
-  \begin{beamercolorbox}[colsep*=0ex,dp=0.5ex,center]{block title}
-  \vskip 0pt
-    \usebeamerfont{block title}\insertblocktitle
-    \vskip-1.25ex
-    \begin{beamercolorbox}[colsep=0.025ex]{block separator}
-    \end{beamercolorbox}
-  \end{beamercolorbox}
-  \vspace{0.9ex}
-  \begin{beamercolorbox}[colsep*=0ex]{block body}
+  \begin{tcolorbox}[
+    enhanced,
+    colback=FSUWhite,      % Perfect white background
+    colframe=FSUGold,      % Thin gold outline
+    coltitle=FSUGarnet,     % Title text color
+    colbacktitle=FSUGold, % Title background color
+    fonttitle=\usebeamerfont{block title},
+    title=\insertblocktitle,
+    % --- Fixed Rounding Keys ---
+    arc=20pt,              % Correct way to set rounded corner radius
+    outer arc=20pt,        % Ensures the outer border matches the inner
+    boxrule=2pt,         % Thin gold outline width
+    % ---------------------------
+    titlerule=0pt,
+    left=1ex, right=1ex, top=1ex, bottom=1ex, 
+    toptitle=.5ex, bottomtitle=.5ex 
+  ]
   \justifying
 }
+
 \setbeamertemplate{block end}{
-  \end{beamercolorbox}
-  \vspace*{1ex}
+  \end{tcolorbox}
+  \vspace*{-1ex}
 }
 
-% Alert block
+% --- Updated Alert and Example Blocks ---
 \setbeamertemplate{block alerted begin}{
-  \begin{beamercolorbox}[colsep*=0ex,dp=2ex,center]{block alerted title}
-  \vskip 0pt
-    \usebeamerfont{block title}\insertblocktitle
-    \vskip-1.25ex
-    \begin{beamercolorbox}[colsep=0.025ex]{block alerted separator}
-    \end{beamercolorbox}
-  \end{beamercolorbox}
-  \vspace{0.5ex}
-  \begin{beamercolorbox}[colsep*=0ex]{block alerted body}
+  \begin{tcolorbox}[enhanced, colback=FSUWhite, colframe=FSUGarnet, coltitle=FSUWhite, colbacktitle=FSUGarnet, 
+    fonttitle=\usebeamerfont{block title}, title=\insertblocktitle, arc=15pt, outer arc=15pt, boxrule=1.5pt]
   \justifying
 }
-\setbeamertemplate{block alerted end}{
-  \end{beamercolorbox}
-  \vspace*{1ex}
-}
+\setbeamertemplate{block alerted end}{\end{tcolorbox}\vspace*{2ex}}
 
-% Example block
 \setbeamertemplate{block example begin}{
-  \begin{beamercolorbox}[colsep*=0ex,dp=2ex,center]{block example title}
-  \vskip0pt
-    \usebeamerfont{block title}\insertblocktitle
-    \vskip-1.25ex
-    \begin{beamercolorbox}[colsep=0.05ex]{block example separator}
-    \end{beamercolorbox}
-  \end{beamercolorbox}
-  \vskip-1ex
-  \begin{beamercolorbox}[colsep*=0ex]{block example body}
+  \begin{tcolorbox}[enhanced, colback=FSUWhite, colframe=FSUBlack, coltitle=FSUWhite, colbacktitle=FSUBlack, 
+    fonttitle=\usebeamerfont{block title}, title=\insertblocktitle, arc=15pt, outer arc=15pt, boxrule=1.5pt]
   \justifying
 }
-\setbeamertemplate{block example end}{
-  \end{beamercolorbox}
-  \vspace*{1ex}
-}
+\setbeamertemplate{block example end}{\end{tcolorbox}\vspace*{2ex}}
 
 \fi
 %===================== Table and Images===============
