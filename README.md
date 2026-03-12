@@ -42,7 +42,11 @@ The complete [PDF can be found here](images/presentation_sample.pdf)
 
 ## How to Use on Overleaf  
 
-### Option 1: Clone This Project
+### Option 1: Direct Copy  
+
+1. [Overleaf project link](https://www.overleaf.com/read/ndyfpyvjkdzh#7472ae)
+
+### Option 2: Clone from GitHub to Overleaf
 1. Go to [Overleaf](https://overleaf.com)  
 2. Click `New Project → Import from GitHub`  
 3. Paste the repo URL:  
@@ -50,7 +54,9 @@ The complete [PDF can be found here](images/presentation_sample.pdf)
    https://github.com/rispace/unofficial-FSU-beamer-theme-template
    ```
 
-### Option 2: Download ZIP
+## How to use Locally
+
+###  Download ZIP
 1. Click the green **Code** button → `Download ZIP`  
 2. Upload files to Overleaf or use in local TeX setup  
 
