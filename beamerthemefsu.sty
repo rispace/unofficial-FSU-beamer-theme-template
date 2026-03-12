@@ -119,34 +119,30 @@
 \setbeamertemplate{headline}{
   \leavevmode%
   \hbox{%
-    \begin{beamercolorbox}[wd=0.5\paperwidth, ht=2.5ex, dp=1.5ex, center]{headline left}%
-      \usebeamerfont{section in head/foot}\vfill\insertsectionhead\vfill
+    \begin{beamercolorbox}[wd=0.5\paperwidth,ht=3ex,dp=1.2ex,center]{headline left}%
+      \usebeamerfont{section in head/foot}\strut\insertsectionhead
     \end{beamercolorbox}%
-    \begin{beamercolorbox}[wd=0.5\paperwidth, ht=2.5ex, dp=1.5ex, center]{headline right}%
-      \usebeamerfont{section in head/foot}\vfill
+    \begin{beamercolorbox}[wd=0.5\paperwidth,ht=3ex,dp=1.2ex,center]{headline right}%
+      \usebeamerfont{section in head/foot}\strut
       \ifx\insertframetitle\empty
-        % Do nothing
       \else
         \ifnum\value{framenumber}=1
-          % Title page: do nothing
         \else
           \ifx\insertframetitle\tableofcontentsname
-            % TOC page: do nothing
           \else
             \foreach \n in {\insertsectionstartpage,...,\insertsectionendpage}{
               \ifnum\n=\insertframenumber
                 \hyperlink{slide\n}{\raisebox{0ex}{\large$\bullet$}}
               \else
-                \hyperlink{slide\n}{\color{gray!60}\raisebox{0ex}{\small$\bullet$}}
+                \hyperlink{slide\n}{\color{FSUGarnet!60}\raisebox{0ex}{\small$\bullet$}}
               \fi
               \hspace{0.2em}
             }
           \fi
         \fi
       \fi
-      \vfill
     \end{beamercolorbox}%
-  }
+  }%
 }
 
 
@@ -228,6 +224,7 @@
 \setbeamerfont{subsection in head/foot}{size=\scriptsize}
 \setbeamerfont{footnote}{size=\tiny}
 %==========Presentation footer============
+
 \setbeamertemplate{footline}{
 
   % ===== Bottom: Custom footer =====
@@ -235,7 +232,7 @@
   \hbox{%
     \begin{beamercolorbox}[wd=0.2\paperwidth,ht=2ex,dp=1.5ex,center]{footline left}%
         \centering
-        \vspace{-.7 ex}
+        \vspace{-1.1 ex}
       \usebeamerfont{section in head/foot} \hspace{1ex}\insertshortauthor
     \end{beamercolorbox}%
     \begin{beamercolorbox}[wd=0.5\paperwidth,ht=2ex,dp=1.5ex,center]{footline center}%
@@ -347,5 +344,4 @@
     {\hypertarget{slide\theframenumber}{}\gdef\insertframetitle}
     {}{}
 \makeatother
-
 
